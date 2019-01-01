@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+    </head>
+    <body>
+        <div class="container">
+       <h1>Categories</h1>
+       <div style="margin-top: 15px; margin-bottom: 20px">
+        <a href="{{url_for('newItem')}}"> <h3>add Items </h3> </a>
+    </div>
+
+        <div class="row">        
+        {% for i in categories %}
+            <div class="col-md-4">
+                    <div class="card bg-light mb-3" style="max-width: 18rem; background-color: antiquewhite">
+                            <div class="card-header">Header</div>
+                            <div class="card-body">
+                              <h5 class="card-title">{{i.name}}</h5>
+                              <hr>
+                              <a href="{{url_for('showCategoryItems', category_id = i.id)}}" class="btn btn-primary">Open Category</a>
+                            </div>
+                          </div>
+                </div> <!-- End Col -->
+        {% endfor %}
+    </div> <!-- End Row -->
+    </div> <!-- End Container -->
+    </body>
+</html>
+
+
+<!-- {% with messages = get_flashed_messages() %}
+        {% if(messages) %}
+        <ul>
+        {% for m in messages %}
+            <li><strong> {{ m }} </strong></li>
+        {%endfor%}
+    </ul>
+        {%endif%}
+        {%endwith%} -->

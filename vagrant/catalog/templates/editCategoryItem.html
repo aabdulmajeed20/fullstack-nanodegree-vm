@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+    </head>
+    <body>
+        <h1>Edit Item </h1>
+
+        <div class="container">
+        <form action="{{url_for('editCategoryItem', category_id = category_id, item_id = item.id)}}" method="POST">
+            <h4>Enter the name:</h4>
+            <input type="text" placeholder="{{item.name}}" name="name">
+            <h4>Enter the description:</h4>
+            <input type="text" placeholder="{{item.description}}" name="description">
+            <h4>Choose Category:</h4>
+            <select class="form-control" name="category">
+                {% for i in categories %}
+                <option value="{{i.id}}">{{i.name}}</option>
+                {%endfor%}
+            </select>
+        </div>
+
+            <input type="submit" value="Edit">
+        </form>
+    </body>
+</html>

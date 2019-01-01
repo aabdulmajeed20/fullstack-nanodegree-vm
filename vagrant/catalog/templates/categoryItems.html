@@ -1,0 +1,38 @@
+<html>
+    <head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+            <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+    </head>
+    <body>
+        <div class="container">
+       <h1> {{category.name}} </h1>
+
+        {% with messages = get_flashed_messages() %}
+        {% if(messages) %}
+        {% for m in messages %}
+            <div class="alert alert-success" role="alert"> {{ m }} </div>
+        {%endfor%}
+        {%endif%}
+        {%endwith%}
+
+        <div class="row" style="margin-top: 25px">
+        {% for i in items %}
+        <div class="col-md-4">
+                <div class="card bg-light mb-3" style="max-width: 18rem; background-color: antiquewhite">
+                        <div class="card-header"></div>
+                        <div class="card-body">
+                      <a href="{{url_for('showItem', item_id = i.id, category_id = category.id)}}"><h5 class="card-title">{{i.name}}</h5></a>
+                          <p class="card-text">{{i.description}}</p>
+                          <hr>
+                          {% if(i.user_id == user_id) %}
+                          <a href="{{url_for('editCategoryItem', category_id = category.id, item_id = i.id)}}" class="btn btn-primary">Edit</a>
+                          <a href="{{url_for('deleteCategoryItem', category_id = category.id, item_id = i.id)}}" class="btn btn-danger">Delete</a>
+                        {% endif %}
+                        </div>
+                      </div>
+            </div>
+        {% endfor %}
+    </div> <!-- End Row -->
+    </div>
+    </body>
+</html>
