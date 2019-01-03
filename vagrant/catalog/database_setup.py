@@ -18,12 +18,11 @@ class User(Base):
 
     @property
     def serialize(self):
-        
         return {
-        'id': self.id,
-        'name': self.name,
-        'email': self.email,
-        'picture': self.picture
+            'id': self.id,
+            'name': self.name,
+            'email': self.email,
+            'picture': self.picture
         }
 
 
@@ -49,9 +48,8 @@ class CategoryItem(Base):
     description = Column(String(250))
     category_id = Column(Integer, ForeignKey('category.id'))
     user_id = Column(Integer, ForeignKey('user.id'))
-    category = relationship(Category)
+    category = relationship(Category, cascade="save-update, delete")
     user = relationship(User)
-    
 
     @property
     def serialize(self):
@@ -62,9 +60,6 @@ class CategoryItem(Base):
             'description': self.description,
         }
 
-        
-
 engine = create_engine('sqlite:///category.db')
-
 
 Base.metadata.create_all(engine)
